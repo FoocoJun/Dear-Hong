@@ -1,5 +1,9 @@
 답안은 [src/welcome/welcome.controller.ts](https://github.com/FoocoJun/Dear-Hong/blob/main/src/welcome/welcome.controller.ts) 경로에 있습니다.
 
+배포(Heroku) [https://dear-hong-test.herokuapp.com](https://dear-hong-test.herokuapp.com)
+아래 swagger UI 참고바랍니다.
+
+
 미리보기
 
 ```js
