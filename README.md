@@ -10,11 +10,62 @@ import { User } from './interfaces/welcome.interface';
 export class WelcomeController {
   @Get('message/:name')
   findOne(@Param('name') name: User['name']): string {
-    console.log(name);
     return `${name}님. 안녕하세요.`;
   }
 }
 ```
+
+## 의식의 흐름
+1. hello라는 이름의 API endpoint를 보고 직관적인 이해가 되는가. X
+2. hello라는 이름의 API에 확장성이 있는가. X
+
+- 해당 사유로 기획된 API 명세서의 변경이 논의 될 수 있는 집단인가? "?"
+### 방안 및 기대결과
+```
+0. API route 변경 hello -> welcome/message
+결과. welcome/message?name="홍길동" -> {% include 하단 의문1 %}
+1. welcome/data 등 접속시 데이터 제공 API 추가 확장 가능.
+```
+
+### 기존 문제 + 상기 내용 적용한 API 답안.
+**GET /welcome/message?name="홍길동"**
+```js
+import { Controller, Get, Query } from '@nestjs/common';
+import { User } from './interfaces/welcome.interface';
+
+@Controller('welcome')
+export class WelcomeController {
+  @Get('message')
+  findAll(@Query('name') name: User['name']): string {
+    return `${name}님. 안녕하세요.`;
+  }
+}
+```
+
+### 추가 의문 및 방안
+```
+  0. endPoint는 예시가 아니다.
+  GET /welcome/message?name="홍길동" -> GET /welcome/message?name={name}
+
+  1. 데이터를 그대로 사용하는데 필터링을 위한 쿼리를 적용해야하는가.
+  GET hello?name={name} -> GET hello/{name}
+```
+### 상기 내용 추가 적용한 API 답안.
+**GET /welcome/message/:name**
+
+```js
+import { Controller, Get, Query } from '@nestjs/common';
+import { User } from './interfaces/welcome.interface';
+
+@Controller('welcome')
+export class WelcomeController {
+  @Get('message/:name')
+  findOne(@Param('name') name: User['name']): string {
+    return `${name}님. 안녕하세요.`;
+  }
+}
+```
+
 
 ---
 이하 내용은 TIL 입니다.
