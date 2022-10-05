@@ -68,8 +68,10 @@ export class WelcomeController {
 
 
 ---
+# TIL
 이하 내용은 TIL 입니다.
 
+## NestJs
 NestJS docs를 이용하여 작성하였습니다.
 
 ```
@@ -103,6 +105,63 @@ Module은 애플리케이션 구조를 구성합니다.
 ```
 $ nest g module module-name
 ```
+
+## SwaggerUI
+[@nestjs/swagger docs](https://docs.nestjs.com/openapi/introduction)를 이용하여 작성하였습니다.
+
+### DocumentBuilder, SwaggerModule
+**DocumentBuilder**
+스웨거 문서 config 작성 - 제먹, 설명, 버전 등.
+**SwaggerModule**
+- createDocument : 
+app Application을 기반으로 config 적용하여 문서 모듈 생성.
+- setup : 
+1번 매개변수 path에 어플리케이션 다큐먼트 제공. `다큐먼트 형성 시 app을 제공 했는데 왜..?`
+```js
+const config = new DocumentBuilder()
+    .setTitle('Dear-Hong')
+    .setDescription('이름 제공시 안녕하세요 서비스')
+    .setVersion('1.0')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('swagger', app, document);
+```
+
+
+
+### @ApiTags
+Controller 수준의 설명 제공
+```js
+@Controller('welcome')
+@ApiTags('유저 방문 환영합니다 API')
+```
+![image](https://user-images.githubusercontent.com/85068289/194105555-fbecd632-393a-46d0-8aae-83acca3af413.png)
+
+
+### @ApiOperation
+EndPoint 수준의 설명 제공
+```js
+@ApiOperation({
+    summary: '유저에게 환영 메세지를 제공하는 API',
+    description: '사용자 이름 기반 메세지를 제공한다.',
+  })
+```
+![image](https://user-images.githubusercontent.com/85068289/194105462-bafbbf0a-544a-4b61-a6e0-97d272fe5399.png)
+
+
+### @ApiParam, @ApiQuery
+Api에 사용되는 Param, Query 수준의 설명 제공
+파라미터의 이름, 필수여부, 설명, 예시 제공 가능.
+```js
+@ApiParam({
+    name: 'name',
+    required: true,
+    description: '메세지에 들어갈 이름',
+    example: '홍길동',
+  })
+```
+![image](https://user-images.githubusercontent.com/85068289/194106041-b85de904-11ec-4f28-8cc0-e552b38a1e3f.png)
+
 
 ---
 
