@@ -47,7 +47,7 @@ export class WelcomeController {
   0. endPoint는 예시가 아니다.
   GET /welcome/message?name="홍길동" -> GET /welcome/message?name={name}
 
-  1. 데이터를 그대로 사용하는데 필터링을 위한 쿼리를 적용해야하는가.
+  의문1. 데이터를 그대로 사용하는데 필터링을 위한 쿼리를 적용해야하는가.
   GET hello?name={name} -> GET hello/{name}
 ```
 ### 상기 내용 추가 적용한 API 답안.
