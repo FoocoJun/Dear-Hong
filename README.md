@@ -111,7 +111,7 @@ $ nest g module module-name
 
 ### DocumentBuilder, SwaggerModule
 **DocumentBuilder**
-스웨거 문서 config 작성 - 제먹, 설명, 버전 등.
+스웨거 문서 config 작성 - 제목, 설명, 버전 등.
 **SwaggerModule**
 - createDocument : 
 app Application을 기반으로 config 적용하여 문서 모듈 생성.
